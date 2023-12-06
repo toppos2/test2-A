@@ -25,14 +25,14 @@ public class Game
      */
     public Game() 
     {
-        createRooms();
+        createGame();
         parser = new Parser();
     }
 
     /**
      * Create all the rooms and link their exits together.
      */
-    private void createRooms()
+    private void createGame()
     {
         Room outside, theater, pub, lab, office, cellar;
       
@@ -57,6 +57,12 @@ public class Game
         cellar.setExit(Room.UP, pub);
 
         currentRoom = outside;  // start game outside
+
+        Item fireaxe = new Item("fireaxe", "fireman's axe to break through doors", 1.7);
+        Item laptop = new Item("laptop", "marc's laptop", 3.7);
+        office.addItem(laptop);
+        office.addItem(fireaxe);
+        cellar.addItem(new Item("barrel", "barrel filled with suspicious liquid", 40.7));
     }
 
     /**
@@ -94,6 +100,7 @@ public class Game
     private void printLocationInfo() {
         System.out.println("You are " + currentRoom.getDescription());
         System.out.println(currentRoom.getExitString());
+        System.out.println(currentRoom.getItemsString());
     }
 
     /**
@@ -156,18 +163,7 @@ public class Game
 
         // Try to leave current room.
         Room nextRoom = null;
-        if(direction.equals("north")) {
-            nextRoom = currentRoom.getExit("north");
-        }
-        if(direction.equals("east")) {
-            nextRoom = currentRoom.getExit("east");
-        }
-        if(direction.equals("south")) {
-            nextRoom = currentRoom.getExit("south");
-        }
-        if(direction.equals("west")) {
-            nextRoom = currentRoom.getExit("west");
-        }
+        nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
