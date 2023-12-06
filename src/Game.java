@@ -34,7 +34,7 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room outside, theater, pub, lab, office, cellar;
       
         // create the rooms
         outside = new Room("outside the main entrance of the university");
@@ -42,13 +42,19 @@ public class Game
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
+        cellar = new Room("in the pub cellar");
         
         // initialise room exits
-        outside.setExits(null, theater, lab, pub);
-        theater.setExits(null, null, null, outside);
-        pub.setExits(null, outside, null, null);
-        lab.setExits(outside, office, null, null);
-        office.setExits(null, null, null, lab);
+        outside.setExit(Room.EAST, theater);
+        outside.setExit(Room.SOUTH, lab);
+        outside.setExit(Room.WEST, pub);
+        theater.setExit(Room.WEST, outside);
+        pub.setExit(Room.EAST, outside);
+        pub.setExit(Room.DOWN, cellar);
+        lab.setExit(Room.NORTH, outside);
+        lab.setExit(Room.EAST, office);
+        office.setExit(Room.WEST,lab);
+        cellar.setExit(Room.UP, pub);
 
         currentRoom = outside;  // start game outside
     }
@@ -87,19 +93,7 @@ public class Game
 
     private void printLocationInfo() {
         System.out.println("You are " + currentRoom.getDescription());
-        System.out.print("Exits: ");
-        if(currentRoom.getExit("north") != null) {
-            System.out.print("north ");
-        }
-        if(currentRoom.getExit("east") != null) {
-            System.out.print("east ");
-        }
-        if(currentRoom.getExit("south") != null) {
-            System.out.print("south ");
-        }
-        if(currentRoom.getExit("west") != null) {
-            System.out.print("west ");
-        }
+        System.out.println(currentRoom.getExitString());
     }
 
     /**

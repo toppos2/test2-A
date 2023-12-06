@@ -17,12 +17,14 @@ import java.util.HashMap;
 
 public class Room
 {
-    public String description;
-    private Room northExit;
-    private Room southExit;
-    private Room eastExit;
-    private Room westExit;
-    public HashMap<String, Room> exits;
+    public static final String NORTH = "north";
+    public static final String EAST = "east";
+    public static final String SOUTH = "south";
+    public static final String WEST = "west";
+    public static final String UP = "up";
+    public static final String DOWN = "down";
+    private String description;
+    private HashMap<String, Room> exits;
 
     /**
      * Create a room described "description". Initially, it has
@@ -36,25 +38,8 @@ public class Room
         exits = new HashMap<>();
     }
 
-    /**
-     * Define the exits of this room.  Every direction either leads
-     * to another room or is null (no exit there).
-     * @param north The north exit.
-     * @param east The east east.
-     * @param south The south exit.
-     * @param west The west exit.
-     */
-    public void setExits(Room north, Room east, Room south, Room west) 
-    {
-        if(north != null)
-            northExit = north;
-            //exits.put("north", north);
-        if(east != null)
-            eastExit = east;
-        if(south != null)
-            southExit = south;
-        if(west != null)
-            westExit = west;
+    public void setExit(String direction, Room room) {
+        exits.put(direction, room);
     }
 
     /**
@@ -66,10 +51,14 @@ public class Room
     }
 
     public Room getExit(String direction) {
-        if(direction.equals("north")) return northExit;
-        if(direction.equals("east")) return eastExit;
-        if(direction.equals("south")) return southExit;
-        if(direction.equals("west")) return westExit;
-        return null;
+        return exits.get(direction);
+    }
+
+    public String getExitString() {
+        String exitString = "Exits: ";
+        for(String direction : exits.keySet()) {
+            exitString += direction + " ";
+        }
+        return exitString;
     }
 }
