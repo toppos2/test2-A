@@ -18,13 +18,14 @@
 public class Game
 {
     private Parser parser;
-    private Room currentRoom;
+    private Player player;
         
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        player = new Player("lennert", 25);
         createGame();
         parser = new Parser();
     }
@@ -56,12 +57,15 @@ public class Game
         office.setExit(Room.WEST,lab);
         cellar.setExit(Room.UP, pub);
 
-        currentRoom = outside;  // start game outside
+        player.setCurrentRoom(outside);
 
         Item fireaxe = new Item("fireaxe", "fireman's axe to break through doors", 1.7);
         Item laptop = new Item("laptop", "marc's laptop", 3.7);
         office.addItem(laptop);
         office.addItem(fireaxe);
+        outside.addItem(new Item("shovel", "you can dig or hit", 2.1));
+        outside.addItem(new Item("pubboard", "thomas more is the best", 4.7));
+        outside.addItem(new Item("keg", "a keg filled with beer just delivered", 72.8));
         cellar.addItem(new Item("barrel", "barrel filled with suspicious liquid", 40.7));
     }
 
@@ -93,14 +97,12 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        printLocationInfo();
+        printPlayerInfo();
         System.out.println();
     }
 
-    private void printLocationInfo() {
-        System.out.println("You are " + currentRoom.getDescription());
-        System.out.println(currentRoom.getExitString());
-        System.out.println(currentRoom.getItemsString());
+    private void printPlayerInfo() {
+        System.out.println(player.getAllInfo());
     }
 
     /**
@@ -118,14 +120,23 @@ public class Game
         }
 
         String commandWord = command.getCommandWord();
-        if (commandWord.equals("help")) {
-            printHelp();
-        }
-        else if (commandWord.equals("go")) {
-            goRoom(command);
-        }
-        else if (commandWord.equals("quit")) {
-            wantToQuit = quit(command);
+        switch(commandWord) {
+            case "help":
+                printHelp();
+                break;
+            case "go":
+                goRoom(command);
+                break;
+            case "grab":
+                grabItem(command);
+                break;
+            case "look":
+                printPlayerInfo();
+                break;
+            case "quit":
+                wantToQuit = quit(command);
+                break;
+            default:
         }
 
         return wantToQuit;
@@ -144,7 +155,7 @@ public class Game
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help");
+        System.out.println("   " + parser.getCommandInfo());
     }
 
     /** 
@@ -163,15 +174,30 @@ public class Game
 
         // Try to leave current room.
         Room nextRoom = null;
-        nextRoom = currentRoom.getExit(direction);
+        nextRoom = player.getCurrentRoom().getExit(direction);
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
         else {
-            currentRoom = nextRoom;
-            printLocationInfo();
+            player.setCurrentRoom(nextRoom);
+            printPlayerInfo();
             System.out.println();
+        }
+    }
+
+    private void grabItem(Command command) {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know what to grab...
+            System.out.println("Grab what?");
+            return;
+        }
+
+        String itemName = command.getSecondWord();
+        if (player.grab(itemName)) {
+            printPlayerInfo();
+        } else {
+            System.out.println("There is no item with the name " + itemName);
         }
     }
 
