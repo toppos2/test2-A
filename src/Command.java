@@ -29,8 +29,9 @@ public class Command
      *                  was not recognised.
      * @param secondWord The second word of the command.
      */
-    public Command(String firstWord, String secondWord)
+    public Command(CommandWord commandWord, String secondWord)
     {
+        /*
         switch(firstWord) {
             case "help":
                 commandWord = CommandWord.HELP;
@@ -50,6 +51,9 @@ public class Command
             default:
                 commandWord = CommandWord.UNKNOWN;
         }
+
+         */
+        this.commandWord = commandWord;
         this.secondWord = secondWord;
     }
 
