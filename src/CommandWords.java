@@ -15,6 +15,7 @@ public class CommandWords
     private static final String[] validCommands = {
         "go", "look", "grab", "quit", "help"
     };
+    
 
     /**
      * Constructor - initialise the command words.

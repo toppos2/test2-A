@@ -124,6 +124,9 @@ public class Game
             case HELP:
                 printHelp();
                 break;
+            case GO:
+                goRoom(command);
+                break;
             case GRAB:
                 grabItem(command);
                 break;
