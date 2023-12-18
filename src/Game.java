@@ -114,11 +114,6 @@ public class Game
     {
         boolean wantToQuit = false;
 
-        if(command.isUnknown()) {
-            System.out.println("I don't know what you mean...");
-            return false;
-        }
-
         CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
             case HELP:
@@ -133,10 +128,15 @@ public class Game
             case LOOK:
                 printPlayerInfo();
                 break;
+            case EAT:
+                consume();
+                break;
             case QUIT:
                 wantToQuit = quit(command);
                 break;
+            case UNKNOWN:
             default:
+                System.out.println("I don't know what you mean...");
         }
 
         return wantToQuit;
@@ -156,6 +156,11 @@ public class Game
         System.out.println();
         System.out.println("Your command words are:");
         System.out.println("   " + parser.getCommandInfo());
+    }
+
+    private void consume() {
+        System.out.println("I did eat and have my full strength again");
+        System.out.println();
     }
 
     /** 

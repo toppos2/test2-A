@@ -22,37 +22,8 @@ public class Command
     private CommandWord commandWord;
     private String secondWord;
 
-    /**
-     * Create a command object. First and second word must be supplied, but
-     * either one (or both) can be null.
-     * @param firstWord The first word of the command. Null if the command
-     *                  was not recognised.
-     * @param secondWord The second word of the command.
-     */
     public Command(CommandWord commandWord, String secondWord)
     {
-        /*
-        switch(firstWord) {
-            case "help":
-                commandWord = CommandWord.HELP;
-                break;
-            case "go":
-                commandWord = CommandWord.GO;
-                break;
-            case "grab":
-                commandWord = CommandWord.GRAB;
-                break;
-            case "look":
-                commandWord = CommandWord.LOOK;
-                break;
-            case "quit":
-                commandWord = CommandWord.QUIT;
-                break;
-            default:
-                commandWord = CommandWord.UNKNOWN;
-        }
-
-         */
         this.commandWord = commandWord;
         this.secondWord = secondWord;
     }

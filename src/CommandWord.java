@@ -1,3 +1,7 @@
 public enum CommandWord {
-    GO, HELP, LOOK, GRAB, QUIT, UNKNOWN
+    GO, HELP, LOOK, EAT, GRAB, QUIT, UNKNOWN
+
+    private CommandWord() {
+
+    }
 }
