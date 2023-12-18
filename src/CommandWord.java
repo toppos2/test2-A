@@ -1,7 +1,12 @@
 public enum CommandWord {
-    GO, HELP, LOOK, EAT, GRAB, QUIT, UNKNOWN
+    GO("go"), BACK("back"), HELP("?"), LOOK("look"), EAT("eat"), GRAB("take"), QUIT("quit"), UNKNOWN("");
+    private String commandString;
 
-    private CommandWord() {
+    CommandWord(String word) {
+        commandString = word;
+    }
 
+    public String getCommandString() {
+        return commandString;
     }
 }

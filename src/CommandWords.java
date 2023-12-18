@@ -21,12 +21,9 @@ public class CommandWords
      */
     public CommandWords() {
         validCommands = new HashMap<>();
-        validCommands.put("go", CommandWord.GO);
-        validCommands.put("look", CommandWord.LOOK);
-        validCommands.put("grab", CommandWord.GRAB);
-        validCommands.put("eat", CommandWord.EAT);
-        validCommands.put("help", CommandWord.HELP);
-        validCommands.put("quit", CommandWord.QUIT);
+        for(CommandWord cw : CommandWord.values()) {
+            if(cw!=CommandWord.UNKNOWN) validCommands.put(cw.getCommandString(), cw);
+        }
     }
 
     /**
