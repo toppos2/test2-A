@@ -119,21 +119,18 @@ public class Game
             return false;
         }
 
-        String commandWord = command.getCommandWord();
+        CommandWord commandWord = command.getCommandWord();
         switch(commandWord) {
-            case "help":
+            case HELP:
                 printHelp();
                 break;
-            case "go":
-                goRoom(command);
-                break;
-            case "grab":
+            case GRAB:
                 grabItem(command);
                 break;
-            case "look":
+            case LOOK:
                 printPlayerInfo();
                 break;
-            case "quit":
+            case QUIT:
                 wantToQuit = quit(command);
                 break;
             default:

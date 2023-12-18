@@ -19,7 +19,7 @@
 
 public class Command
 {
-    private String commandWord;
+    private CommandWord commandWord;
     private String secondWord;
 
     /**
@@ -31,7 +31,25 @@ public class Command
      */
     public Command(String firstWord, String secondWord)
     {
-        commandWord = firstWord;
+        switch(firstWord) {
+            case "help":
+                commandWord = CommandWord.HELP;
+                break;
+            case "go":
+                commandWord = CommandWord.GO;
+                break;
+            case "grab":
+                commandWord = CommandWord.GRAB;
+                break;
+            case "look":
+                commandWord = CommandWord.LOOK;
+                break;
+            case "quit":
+                commandWord = CommandWord.QUIT;
+                break;
+            default:
+                commandWord = CommandWord.UNKNOWN;
+        }
         this.secondWord = secondWord;
     }
 
@@ -40,7 +58,7 @@ public class Command
      * command was not understood, the result is null.
      * @return The command word.
      */
-    public String getCommandWord()
+    public CommandWord getCommandWord()
     {
         return commandWord;
     }
@@ -59,7 +77,7 @@ public class Command
      */
     public boolean isUnknown()
     {
-        return (commandWord == null);
+        return (commandWord == CommandWord.UNKNOWN);
     }
 
     /**
