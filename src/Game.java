@@ -187,15 +187,19 @@ public class Game
     }
 
     private void grabItem(Command command) {
-        if(!command.hasSecondWord()) {
+        if (!command.hasSecondWord()) {
             // if there is no second word, we don't know what to grab...
             System.out.println("Grab what?");
             return;
         }
 
         String itemName = command.getSecondWord();
-        if (player.grab(itemName)) {
+        //if (player.grab(itemName)) {
+        GrabStatus status = player.grab(itemName);
+        if (status==GrabStatus.OK) {
             printPlayerInfo();
+        } else if (status==GrabStatus.TOOHEAVY) {
+            System.out.println("The item with the name " + itemName + " is too heavy");
         } else {
             System.out.println("There is no item with the name " + itemName);
         }

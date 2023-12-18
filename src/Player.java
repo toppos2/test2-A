@@ -6,7 +6,7 @@ public class Player {
     private double maxWeight;
     private ArrayList<Item> bag;
 
-    public Player(String name, double mexWeight) {
+    public Player(String name, double maxWeight) {
         bag = new ArrayList<>();
         this.name = name;
         setMaxWeight(maxWeight);
@@ -33,15 +33,16 @@ public class Player {
         return name;
     }
 
-    public boolean grab(String itemName) {
+    public GrabStatus grab(String itemName) {
         Item foundItem = currentRoom.getItem(itemName);
         if (foundItem!=null && getBagWeight() + foundItem.getWeight() <= maxWeight) {
             bag.add(foundItem);
-            return true;
+            return GrabStatus.OK;
         } else if(foundItem!=null) {
             currentRoom.addItem(foundItem);
+            return GrabStatus.TOOHEAVY;
         }
-        return false;
+        return GrabStatus.NOTFOUND;
     }
 
     private double getBagWeight() {
