@@ -122,6 +122,9 @@ public class Game
             case GO:
                 goRoom(command);
                 break;
+            case BACK:
+                goBack();
+                break;
             case GRAB:
                 grabItem(command);
                 break;
@@ -163,6 +166,15 @@ public class Game
         System.out.println();
     }
 
+    private void goBack() {
+        if(player.back()) {
+            printPlayerInfo();
+        } else {
+            System.out.println("There is nothing to go back to...");
+        }
+        System.out.println();
+    }
+
     /** 
      * Try to go in one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
@@ -178,14 +190,10 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = null;
-        nextRoom = player.getCurrentRoom().getExit(direction);
-
-        if (nextRoom == null) {
+        if (!player.go(direction)) {
             System.out.println("There is no door!");
         }
         else {
-            player.setCurrentRoom(nextRoom);
             printPlayerInfo();
             System.out.println();
         }

@@ -1,13 +1,17 @@
 import java.util.ArrayList;
+import java.util.EmptyStackException;
+import java.util.Stack;
 
 public class Player {
     private String name;
     private Room currentRoom;
     private double maxWeight;
     private ArrayList<Item> bag;
+    private Stack<Room> previousRooms;
 
     public Player(String name, double maxWeight) {
         bag = new ArrayList<>();
+        previousRooms = new Stack<>();
         this.name = name;
         setMaxWeight(maxWeight);
     }
@@ -31,6 +35,29 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public boolean go(String direction) {
+        Room nextRoom = null;
+        nextRoom = currentRoom.getExit(direction);
+
+        if (nextRoom == null) {
+            return false;
+        }
+        else {
+            previousRooms.push(currentRoom);
+            setCurrentRoom(nextRoom);
+            return true;
+        }
+    }
+
+    public boolean back() {
+        try {
+            currentRoom = previousRooms.pop();
+            return true;
+        } catch(EmptyStackException e) {
+            return false;
+        }
     }
 
     public GrabStatus grab(String itemName) {
