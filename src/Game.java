@@ -68,16 +68,16 @@ public class Game
         outside.addItem(new Item("keg", "a keg filled with beer just delivered", 72.8));
         cellar.addItem(new Item("barrel", "barrel filled with suspicious liquid", 40.7));
 
-        Item bread = new Item("bread", "someone lost this bread a couple of weeks ago", 1.28);
-        Item apple = new Item("apple", "a very tasty apple to eat", 0.25);
-        Item ananas = new Item("ananas", "a very tasty ananas to eat", 1.14);
-        Item cake = new Item("cake", "this cake is much too old to eat", 0.56);
-        Item sausage = new Item("sausage", "a sausage made of fake meat", 0.68);
-        outside.addItem(bread);
-        pub.addItem(cake);
-        lab.addItem(apple);
-        office.addItem(ananas);
-        theater.addItem(sausage);
+        Item whisky = new Item("whisky", "an empty bottle of whisky thrown away by someone", 0.28);
+        Item waterbottle = new Item("water", "a bottle of fresh water", 1.25);
+        Item water2 = new Item("sparkling-water", "a botle of Perrier sparkling water", 1.14);
+        Item soap = new Item("liquid", "someone did put this liquid soap in a water bottle", 1.56);
+        Item tonic = new Item("tonic", "a small bottle of tonic", 0.68);
+        outside.addItem(whisky);
+        pub.addItem(soap);
+        lab.addItem(waterbottle);
+        office.addItem(water2);
+        theater.addItem(tonic);
     }
 
     /**
