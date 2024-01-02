@@ -67,6 +67,17 @@ public class Game
         outside.addItem(new Item("pubboard", "thomas more is the best", 4.7));
         outside.addItem(new Item("keg", "a keg filled with beer just delivered", 72.8));
         cellar.addItem(new Item("barrel", "barrel filled with suspicious liquid", 40.7));
+
+        Item bread = new Item("bread", "someone lost this bread a couple of weeks ago", 1.28);
+        Item apple = new Item("apple", "a very tasty apple to eat", 0.25);
+        Item ananas = new Item("ananas", "a very tasty ananas to eat", 1.14);
+        Item cake = new Item("cake", "this cake is much too old to eat", 0.56);
+        Item sausage = new Item("sausage", "a sausage made of fake meat", 0.68);
+        outside.addItem(bread);
+        pub.addItem(cake);
+        lab.addItem(apple);
+        office.addItem(ananas);
+        theater.addItem(sausage);
     }
 
     /**
