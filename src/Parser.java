@@ -59,7 +59,7 @@ public class Parser
         return new Command(commands.getCommand(word1), word2);
     }
 
-    public String getCommandInfo() {
+    public String getCommandsAsString() {
         return commands.getCommandInfo();
     }
 }
