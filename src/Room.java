@@ -25,6 +25,7 @@ public class Room
     public static final String WEST = "west";
     public static final String UP = "up";
     public static final String DOWN = "down";
+    public static final String WHATEVER = "whatever";
     private String description;
     private HashMap<String, Room> exits;
     private ArrayList<Item> items;
@@ -43,8 +44,11 @@ public class Room
     }
 
     public void setExit(String direction, Room room) {
-        exits.put(direction, room);
+        if (!direction.equals(WHATEVER)) {
+            exits.put(direction, room);
+        }
     }
+
 
     /**
      * @return The description of the room.
