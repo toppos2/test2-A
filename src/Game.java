@@ -145,9 +145,9 @@ public class Game
             case EAT:
                 consume();
                 break;
-            case DRINK:
+           /* case DRINK:
                 drink(command);
-                break;
+                break;*/
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -232,7 +232,7 @@ public class Game
         }
     }
 
-    private void drink(Command command) {
+  /*  private void drink(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Drink what?");
             return;
@@ -251,7 +251,7 @@ public class Game
             System.out.println("There is no item with the name " + itemName + " in your bag.");
         }
         printPlayerInfo();
-    }
+    }*/
 
     /** 
      * "Quit" was entered. Check the rest of the command to see
