@@ -145,6 +145,9 @@ public class Game
             case EAT:
                 consume();
                 break;
+            case DRINK:
+                drinkItem(command);
+                break;
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -229,6 +232,13 @@ public class Game
         }
     }
 
+    private void drinkItem(Command command) {
+        if (!command.hasSecondWord()) {
+
+            System.out.println("Drink what?");
+            return;
+        }
+    }
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.

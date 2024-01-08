@@ -2,11 +2,13 @@ public class Item {
     private String name;
     private String description;
     private double weight;
+    private boolean drinkable;
 
-    public Item(String name, String description, double weight) {
+    public Item(String name, String description, double weight /*boolean drinkable*/) {
         this.name = name;
         this.description = description;
         this.weight = weight;
+        this.drinkable = drinkable;
     }
 
     public String getName() {
@@ -21,7 +23,15 @@ public class Item {
         return weight;
     }
 
+    public boolean isItemDrinkable() {
+        return drinkable;
+    }
+
     public String toString() {
-        return name + " (" + description + ") weighs " + weight + " kg";
+        String itemString = name + " (" + description + ") weighs " + weight + " kg";
+        if (drinkable) {
+            itemString += " is DRINKABLE";
+        }
+        return itemString;
     }
 }
