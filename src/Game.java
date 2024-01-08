@@ -237,15 +237,16 @@ public class Game
             System.out.println("Drink what?");
             return;
         }
-
         String itemName = command.getSecondWord();
         Item itemToDrink = player.getItemFromBag(itemName);
 
-        if (itemToDrink != null) {
-
-            System.out.println("You drank the " + itemName + ". It tastes refreshing!");
-
-            player.removeFromBag(itemToDrink);
+        if (itemToDrink != null ) {
+            if (!Item.isItemDrinkable()) {
+                System.out.println("You can't drink the " + itemName + ". It's not drinkable!");
+            } else {
+                System.out.println("You drank the " + itemName + ". It tastes refreshing!");
+                player.removeFromBag(itemToDrink);
+            }
         } else {
             System.out.println("There is no item with the name " + itemName + " in your bag.");
         }

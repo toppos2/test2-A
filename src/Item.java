@@ -23,7 +23,7 @@ public class Item {
         return weight;
     }
 
-    public boolean isItemDrinkable() {
+    public static boolean isItemDrinkable() {
         return drinkable;
     }
 
