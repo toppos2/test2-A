@@ -146,7 +146,7 @@ public class Game
                 consume();
                 break;
             case DRINK:
-                drinkItem(command);
+                drink(command);
                 break;
             case QUIT:
                 wantToQuit = quit(command);
@@ -228,17 +228,30 @@ public class Game
         } else if (status==GrabStatus.TOOHEAVY) {
             System.out.println("The item with the name " + itemName + " is too heavy");
         } else {
-            System.out.println("There is no item with the name " + itemName);
+            System.out.println("T here is no item with the name " + itemName);
         }
     }
 
-    private void drinkItem(Command command) {
+    private void drink(Command command) {
         if (!command.hasSecondWord()) {
-
             System.out.println("Drink what?");
             return;
         }
+
+        String itemName = command.getSecondWord();
+        Item itemToDrink = player.getItemFromBag(itemName);
+
+        if (itemToDrink != null) {
+
+            System.out.println("You drank the " + itemName + ". It tastes refreshing!");
+
+            player.removeFromBag(itemToDrink);
+        } else {
+            System.out.println("There is no item with the name " + itemName + " in your bag.");
+        }
+        printPlayerInfo();
     }
+
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.

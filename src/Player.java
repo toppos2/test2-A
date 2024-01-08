@@ -87,6 +87,19 @@ public class Player {
         }
         return returnString;
     }
+    public Item getItemFromBag(String itemName) {
+        for (Item item : bag) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public void removeFromBag(Item item) {
+        bag.remove(item);
+    }
+
 
     public String getAllInfo() {
         String info = name;
