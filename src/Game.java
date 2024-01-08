@@ -228,7 +228,11 @@ public class Game
             System.out.println("There is no item with the name " + itemName);
         }
     }
-
+    private void show(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println(player.getAllInfo());
+        }
+    }
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
