@@ -229,10 +229,24 @@ public class Game
         }
     }
     private void show(Command command) {
-        if (!command.hasSecondWord()) {
-            System.out.println(player.getAllInfo());
+        if (command.hasSecondWord()) {
+            String secondWord = command.getSecondWord().toLowerCase();
+
+            switch (secondWord) {
+                case "room":
+                    System.out.println(player.getCurrentRoom().getDescription());
+                    break;
+                case "player":
+                    printPlayerInfo();
+                    break;
+                default:
+                    System.out.println(player.getAllInfo());
+            }
         }
     }
+
+
+
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
