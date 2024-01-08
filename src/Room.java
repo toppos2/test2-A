@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
+
 
 /**
  * Class Room - a room in an adventure game.
@@ -30,6 +32,7 @@ public class Room
     private HashMap<String, Room> exits;
     private ArrayList<Item> items;
 
+
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -41,6 +44,7 @@ public class Room
         this.description = description;
         exits = new HashMap<>();
         items = new ArrayList<>();
+        Random rand1 = new Random();
     }
 
     public void setExit(String direction, Room room) {
@@ -48,6 +52,8 @@ public class Room
             exits.put(direction, room);
         }
     }
+
+
 
 
     /**
@@ -59,6 +65,14 @@ public class Room
     }
 
     public Room getExit(String direction) {
+        if (direction.equals(WHATEVER)) {
+            ArrayList<String> exitList = new ArrayList<>(exits.keySet());
+            if (!exitList.isEmpty()) {
+                Random random = new Random();
+                int randomIndex = random.nextInt(exitList.size());
+                return exits.get(exitList.get(randomIndex));
+            }
+        }
         return exits.get(direction);
     }
 
